@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 //const url = String(process.env.MONGODB_URI)
 
-console.log('connecting to', url)
+//console.log('connecting to', url)
 
 mongoose.set('useFindAndModify', false)
 
