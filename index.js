@@ -38,9 +38,9 @@ let persons = [
     }
   ]
 
-  app.get('/api/info', (req, res) => {
+  app.get('/api/info', (request, response) => {
     Person.find({}).then(people => {
-      res.send(
+      response.send(
         `<p>Phonebook has info for ${people.length} people</p>`+
         new Date()
         )
