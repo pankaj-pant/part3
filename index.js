@@ -64,10 +64,10 @@ let persons = [
     .catch(error => next(error))
   })
 
-  app.delete('/api/persons/:id', (req, res, next) => {
-    Person.findByIdAndRemove(req.params.id)
+  app.delete('/api/persons/:id', (request, response, next) => {
+    Person.findByIdAndRemove(request.params.id)
     .then(result => {
-      res.status(204).end()
+      response.status(204).end()
     })
     .catch(error => next(error))
   })
