@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
-const url = String(process.env.MONGODB_URI)
+//const url = String(process.env.MONGODB_URI)
 
 console.log('connecting to', url)
 
 mongoose.set('useFindAndModify', false)
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
