@@ -23,7 +23,7 @@ let persons = [
     },
     {
       name: "Ada Lovelace",
-      number: "4593283290",
+      number: "459328329",
       id: 2
     },
     {
@@ -38,13 +38,9 @@ let persons = [
     }
   ]
 
-  /* app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
-  }) */
-
-  app.get('/api/info', (request, response) => {
+  app.get('/api/info', (req, res) => {
     Person.find({}).then(people => {
-      response.send(
+      res.send(
         `<p>Phonebook has info for ${people.length} people</p>`+
         new Date()
         )
@@ -68,10 +64,10 @@ let persons = [
     .catch(error => next(error))
   })
 
-  app.delete('/api/persons/:id', (request, response, next) => {
-    Person.findByIdAndRemove(request.params.id)
+  app.delete('/api/persons/:id', (req, res, next) => {
+    Person.findByIdAndRemove(req.params.id)
     .then(result => {
-      response.status(204).end()
+      res.status(204).end()
     })
     .catch(error => next(error))
   })
