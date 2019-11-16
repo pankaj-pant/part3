@@ -72,12 +72,8 @@ let persons = [
     .catch(error => next(error))
   })
 
-  app.post('/api/persons', (request, response) => {
+  app.post('/api/persons', (request, response, next) => {
     const body = request.body
-  
-    if (body.name === undefined) {
-      return response.status(400).json({ error: 'content missing' })
-    }
   
     const person = new Person({
       name: body.name,
@@ -87,6 +83,7 @@ let persons = [
     person.save().then(savedPerson => {
       response.json(savedPerson.toJSON())
     })
+    .catch(error => next(error))
   })
 
   app.put('/api/persons/:id', (request, response, next) => {
@@ -115,7 +112,9 @@ let persons = [
   
     if (error.name === 'CastError' && error.kind === 'ObjectId') {
       return response.status(400).send({ error: 'malformatted id' })
-    } 
+    } else if (error.name === 'ValidationError') {
+      return response.status(400).json({ error: error.message })
+    }
   
     next(error)
   }
